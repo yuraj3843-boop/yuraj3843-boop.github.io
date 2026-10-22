@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>정유라 | 프로필</title>
+
+  <!-- 웹 폰트 (Pretendard: 모바일과 PC 모두에서 깔끔하게 보이는 한글 폰트) -->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+
+  <style>
+    /* ==========================================================
+       [디자인 스타일 설정]
+       화사하고 산뜻한 파스텔톤 컬러와 모바일 맞춤 디자인입니다.
+    ========================================================== */
+    :root {
+      --bg-gradient-start: #fbf5f3; /* 부드러운 살구빛 파스텔 */
+      --bg-gradient-end: #edf2fb;   /* 은은한 하늘빛 파스텔 */
+      --card-bg: #ffffff;
+      --text-main: #2d3748;
+      --text-sub: #718096;
+      --primary-pastel: #ffccd5;    /* 파스텔 핑크 */
+      --primary-hover: #ffb3c1;
+      --secondary-pastel: #e2eafc;  /* 파스텔 블루 */
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+      --radius: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start) 0%, #f6e6ec 50%, var(--bg-gradient-end) 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px 16px;
+      color: var(--text-main);
+    }
+
+    /* 모바일/PC 공통 카드 컨테이너 */
+    .profile-card {
+      background: var(--card-bg);
+      width: 100%;
+      max-width: 420px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 36px 24px 28px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 프로필 사진 영역 */
+    .photo-wrapper {
+      position: relative;
+      width: 110px;
+      height: 110px;
+      margin: 0 auto 20px;
+    }
+
+    .profile-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 50%;
+      border: 4px solid #fff;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.09);
+      background-color: #f7fafc;
+      transition: transform 0.3s ease;
+    }
+
+    .profile-photo:hover {
+      transform: scale(1.04);
+    }
+
+    /* 이름 & 한 줄 소개 영역 */
+    .profile-name {
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    .profile-bio {
+      font-size: 0.96rem;
+      color: var(--text-sub);
+      line-height: 1.55;
+      margin-bottom: 24px;
+      word-break: keep-all;
+    }
+
+    /* 링크 버튼 목록 */
+    .link-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .link-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 18px;
+      background: #f8fafc;
+      border: 1px solid #edf2f7;
+      border-radius: 16px;
+      text-decoration: none;
+      color: var(--text-main);
+      font-weight: 600;
+      font-size: 0.98rem;
+      transition: all 0.25s ease;
+    }
+
+    .link-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .link-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 11px;
+      background: #ffffff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
+    }
+
+    .instagram-icon {
+      color: #d62976;
+      background: #fdf2f4;
+    }
+
+    .xhs-icon {
+      background: #fff0f2;
+    }
+
+    .email-icon {
+      color: #475569;
+      background: #f1f5f9;
+    }
+
+    .link-item:hover .link-icon {
+      transform: scale(1.08);
+    }
+
+    .link-arrow {
+      color: #a0aec0;
+      font-size: 1.1rem;
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+
+    /* 링크 버튼에 마우스 올렸을 때(호버) & 터치 효과 */
+    .link-item:hover, .link-item:active {
+      background: #ffffff;
+      border-color: #cbd5e1;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+    }
+
+    .link-item:hover .link-arrow {
+      color: var(--text-main);
+      transform: translateX(3px);
+    }
+
+    /* 하단 안내 텍스트 */
+    .footer-note {
+      font-size: 0.8rem;
+      color: #a0aec0;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="profile-card">
+    
+    <!-- ========================================================
+         [1. 프로필 사진 바꾸는 곳]
+         동일한 폴더 안에 profile.jpg 파일을 넣으시면 사진이 자동으로 표시됩니다.
+         (사진 파일이 아직 없을 때는 귀여운 기본 아바타가 표시됩니다)
+    ======================================================== -->
+    <div class="photo-wrapper">
+      <img 
+        src="profile_3d_v2.jpg" 
+        alt="프로필 사진" 
+        class="profile-photo"
+        onerror="this.onerror=null; this.src='profile.jpg';"
+      />
+    </div>
+
+    <!-- ========================================================
+         [2. 이름]
+    ======================================================== -->
+    <h1 class="profile-name">정유라</h1>
+
+    <!-- ========================================================
+         [3. 한 줄 소개]
+    ======================================================== -->
+    <p class="profile-bio">
+      温柔有光，自成宇宙
+    </p>
+
+    <!-- ========================================================
+         [4. 링크 버튼]
+    ======================================================== -->
+    <div class="link-list">
+      
+      <!-- 인스타그램 링크 -->
+      <a href="https://www.instagram.com/yullla_j?xtok=Nmxna2FlajY1YzEz&amp;utm_source=qr" target="_blank" rel="noopener noreferrer" class="link-item">
+        <div class="link-left">
+          <span class="link-icon instagram-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+          </span>
+          <span>인스타그램 (@yullla_j)</span>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+
+      <!-- 샤오홍슈 링크 -->
+      <a href="https://xhslink.cn/o/nLM9fc4l1l" target="_blank" rel="noopener noreferrer" class="link-item">
+        <div class="link-left">
+          <span class="link-icon xhs-icon">
+            <img src="xhs.png" alt="小红书" style="width: 22px; height: 22px; border-radius: 5px; object-fit: contain; display: block;">
+          </span>
+          <span>小红书 (샤오홍슈)</span>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+
+      <!-- 이메일 문의 링크 -->
+      <a href="mailto:yr00616@naver.com" class="link-item">
+        <div class="link-left">
+          <span class="link-icon email-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="4" width="20" height="16" rx="3"></rect>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+            </svg>
+          </span>
+          <span>이메일 보내기</span>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+
+      <!-- 나중에 블로그 링크가 필요할 때 아래 주석을 풀어서 사용하시면 됩니다.
+      <a href="https://blog.naver.com" target="_blank" rel="noopener noreferrer" class="link-item">
+        <div class="link-left">
+          <span class="link-icon">📝</span>
+          <span>블로그</span>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+      -->
+
+    </div>
+
+    <!-- 하단 문구 -->
+    <p class="footer-note">© 2026. All rights reserved.</p>
+
+  </div>
+</body>
+</html>
